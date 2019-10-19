@@ -11,13 +11,20 @@ class App extends React.Component {
   }
 
 fetchPokemon() {
-	console.log('hola');
-} 
+	const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/';
+	fetch(ENDPOINT)
+	.then(response => response.json())
+	.then(data => fetch(data.pokemon))
+	.then(pokemons => pokemons.json())
+	.then(pokemons => console.log(pokemons.results))
+}
 
   render() {
 		this.fetchPokemon();
     return (
       <div className="app">
+				<label htmlFor="search">Please, introduce the name of a pokemon:</label>
+				<input type="text" name="search" id="search"/>
       </div>
     );
   }
