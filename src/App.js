@@ -6,32 +6,49 @@ class App extends React.Component {
     super(props);
 
 		this.state = {
-			pokemons: []
+			pokemons: [],
+			query: ''
 		}
+
+		this.getQuery = this.getQuery.bind(this);
   }
 
 componentDidMount() {
 	this.fetchPokemon();
 }
 
+getQuery (event) {
+	const newQuery = event.currentTarget.value;
+	this.setState({
+	 query: newQuery 
+	})
+}
+
 fetchPokemon() {
-	const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/';
+	const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=25';
 	fetch(ENDPOINT)
 	.then(response => response.json())
 	.then(data => {
-	  const limit = '?limit=';
-	 	const pokeNumber = '25';
-		return(
-			fetch(data.pokemon + limit + pokeNumber)
-		)
-	})
-	.then(pokemons => pokemons.json())
-	.then(pokemons => {
-		console.log(pokemons.results);
-		this.setState({
-			pokemons: pokemons.results
-		})
-	})
+		for (let item of data.results) {
+			fetch(item.url)
+			.then(response => response.json())
+			.then(data => {
+				const types = [];
+				for (let item of data.types) {
+					types.push(item.types.name); 
+				}
+				const pokemon = {
+					pic: data.sprites.front_default,
+					name: data.name,
+					id: data.id,
+					types: types
+				}
+				this.setState({
+					pokemons: [...this.state.pokemons, pokemon]
+				});
+			})
+		}
+	}) 
 }
 
   render() {
@@ -42,22 +59,27 @@ fetchPokemon() {
 					<h1 className="header__title">pokedex</h1>
 				</header>
 				<main className="app__main">
-					<label htmlFor="search">Please, introduce the name of a pokemon:</label>
-					<input type="text" name="search" id="search"/>
+					<label htmlFor="search">
+						<input type="text" name="search" id="search" placeholder="Please, insert pokemon, e.g., pikachu"/>
+					</label>
 					<ol className="pokemons__list">
-						{
-							pokemons.map((pokemon, index) => {
+ 						{
+							pokemons.map(pokemon => {
 								return (
-									<li className="pokemon__card" key={index + 1}>
+									<li className="pokemon__card" key={pokemon.id}>
 										<div className="card__container">
-											<img src="" alt={pokemon.name}/>
-											<h2 className="pokemon__name">{pokemon.name}</h2>
-											<p className="pokemon__id">{'ID/' + (index + 1)}</p>
-											<ul className="pokemon_types">
-												<li className="pokemon_type">
-													paco
-												</li>
-											</ul>
+											<div className="card__upper">
+												<img src={pokemon.pic} alt={pokemon.name}/>
+												<p className="pokemon__id">{'ID/' + pokemon.id}</p>
+											</div>
+											<div className="card__lower">
+												<h2 className="pokemon__name">{pokemon.name}</h2>
+												<ul className="pokemon_types">
+													<li className="pokemon_type" key={pokemon.id}>
+														{pokemon.types.type}
+													</li>
+												</ul>
+											</div>
 										</div>
 									</li>
 								)
@@ -66,7 +88,7 @@ fetchPokemon() {
 					</ol>
 				</main>
 				<footer className="app__footer">
-
+					<h4 className="footer__copy">Copyright © 2019 POKEDEX by Marta García</h4>
 				</footer>
       </div>
     );
