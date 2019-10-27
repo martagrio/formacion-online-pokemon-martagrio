@@ -74,8 +74,8 @@ fetchPokemon() {
 											</div>
 											<div className="card__lower">
 												<h2 className="pokemon__name">{pokemon.name}</h2>
-												<ul className="pokemon_types">
-													<li className="pokemon_type" key={pokemon.id}>
+												<ul className="pokemon__types">
+													<li className="pokemon__type" key={pokemon.id}>
 														{pokemon.types.type}
 													</li>
 												</ul>
