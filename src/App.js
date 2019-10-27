@@ -35,7 +35,7 @@ fetchPokemon() {
 			.then(data => {
 				const types = [];
 				for (let item of data.types) {
-					types.push(item.types.name); 
+					types.push(item.name); 
 				}
 				const pokemon = {
 					pic: data.sprites.front_default,
