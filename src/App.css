@@ -1,13 +1,36 @@
 .app {
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-align: center;
+	background-color: rgba(173, 118, 224, 0.637);
+	height: 100vh;
+	padding: 30px;
 }
 
+.header__title  {
+	text-transform: uppercase;
+	color: rgba(211, 31, 31, 0.87);
+	font-weight: 700;
+	font-size: 45px;
+	margin: 20px;
+}
 .pokemons__list {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	grid-gap: 20px;
 	list-style: none;
+	padding: 0;
 }
-
+.pokemon__card {
+	background-color: rgba(0, 255, 213, 0.534);
+	border-radius: 15px;
+	padding: 7px;
+}
 .pokemon__types {
 	list-style: none;
+	padding: 0;
+	display: flex;
+}
+
+.pokemon__type {
+	margin: 3px;
 }
