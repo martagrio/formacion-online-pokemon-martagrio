@@ -1,7 +1,7 @@
 .app {
 	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-align: center;
-	background-color: rgba(173, 118, 224, 0.637);
+	background-color: rgba(173, 118, 224, 0.466);
 	height: 100vh;
 	padding: 30px;
 }
@@ -21,9 +21,11 @@
 	padding: 0;
 }
 .pokemon__card {
+	color: rgba(133, 125, 125, 0.87);
 	background-color: rgba(0, 255, 213, 0.534);
 	border-radius: 15px;
 	padding: 7px;
+	text-transform: capitalize;
 }
 .pokemon__types {
 	list-style: none;

@@ -25,7 +25,7 @@ getQuery (event) {
 }
 
 fetchPokemon() {
-	const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=5';
+	const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=25';
 	fetch(ENDPOINT)
 	.then(response => response.json())
 	.then(data => {
