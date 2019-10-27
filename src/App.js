@@ -25,7 +25,7 @@ getQuery (event) {
 }
 
 fetchPokemon() {
-	const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=25';
+	const ENDPOINT = 'http://pokeapi.salestock.net/api/v2/pokemon/?limit=5';
 	fetch(ENDPOINT)
 	.then(response => response.json())
 	.then(data => {
@@ -35,7 +35,7 @@ fetchPokemon() {
 			.then(data => {
 				const types = [];
 				for (let item of data.types) {
-					types.push(item.name); 
+					types.push(item.type.name); 
 				}
 				const pokemon = {
 					pic: data.sprites.front_default,
@@ -75,9 +75,14 @@ fetchPokemon() {
 											<div className="card__lower">
 												<h2 className="pokemon__name">{pokemon.name}</h2>
 												<ul className="pokemon__types">
-													<li className="pokemon__type" key={pokemon.id}>
-														{pokemon.types.type}
-													</li>
+													{pokemon.types.map (type => {
+														return(
+															<li className="pokemon__type" key={type}>
+																{type}
+															</li>
+														)
+													 })
+													}
 												</ul>
 											</div>
 										</div>
