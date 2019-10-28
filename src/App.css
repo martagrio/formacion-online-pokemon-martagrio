@@ -1,8 +1,10 @@
+body {
+	background-color: rgba(173, 118, 224, 0.466);
+}
+
 .app {
 	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-align: center;
-	background-color: rgba(173, 118, 224, 0.466);
-	height: 100vh;
 	padding: 30px;
 }
 
@@ -31,6 +33,7 @@
 	list-style: none;
 	padding: 0;
 	display: flex;
+	justify-content: space-evenly;
 }
 
 .pokemon__type {
